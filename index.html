@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<script src="novel.js"></script>
+<title>小説投稿サイト相互変換</title>
+</head>
+<body>
+<h1>小説投稿サイトの形式を相互に変換</h1>
+<hr>
+<form name="form1">
+<p>
+	<select name="input" >
+	<option value="narou">小説家になろう</option>
+	<option value="kakuyomu">カクヨム</option>
+	<option value="pixiv">pixiv</option>
+	<option value="aozora">青空文庫</option>
+	</select>
+から
+	<select name="output" >
+	<option value="narou">小説家になろう</option>
+	<option value="kakuyomu">カクヨム</option>
+	<option value="pixiv">pixiv</option>
+	<option value="aozora">青空文庫</option>
+	<option value="aozora">でんでんコンバーター</option>
+	</select>
+へ<input type="button" value="変換" onclick="henkan()"></p>
+
+<p><textarea cols="100" rows="20" name="textarea1"></textarea></p>
+<p><textarea cols="100" rows="20" name="textarea2"></textarea></p>
+</form>
+</body>
+</html>
