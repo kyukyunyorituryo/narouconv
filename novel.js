@@ -153,7 +153,7 @@ $1［＃「$1」に丸傍点］
 */
 function KakuyomuAozora(str){
 str = str.replace(/\|(.+?)《(.+?)》/mg, "｜$1《$2》");
-str = str.replace(/《《 (.+?)》》/mg, "$1［＃「$1」に丸傍点］");
+str = str.replace(/《《(.+?)》》/mg, "$1［＃「$1」に丸傍点］");
 return str;
 }
 
