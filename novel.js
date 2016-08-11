@@ -17,6 +17,8 @@ function henkan(){
 		case 1:str = KakuyomuAozora(str);break;
 		case 2:str = PixivAozora(str);break;
 		case 3:break;
+		case 4:str = BccksAozora(str);break;
+
 	}
 	var outputNum=document.form1.output.selectedIndex;
 		switch (outputNum){
@@ -25,6 +27,7 @@ function henkan(){
 		case 2:str = AozoraPixiv(str);break;
 		case 3:break;
 		case 4:str = AozoraDenden(str);break;
+		case 4:str = AozoraBccks(str);break;
 	}
 	document.form1.textarea2.value=str;
 }
@@ -181,15 +184,26 @@ str = str.replace(/\[chapter:(.+?)\]/mg, "［＃大見出し］$1［＃大見出
 //挿絵とリンクは後で
 return str;
 }
-// BCCKSから青空文庫形式のルビに変換
-http://support.bccks.jp/faq/text_import/
-/*テスト用コード
-	function BccksAozora(){
-	aa=document.form1.textarea1.value;
-	var newstr = aa.replace(/\{(.+?)\}\((.+?)\)/mg, "｜$1《$2》");
-	document.form1.textarea2.value=newstr;
-	}
-*/
+// BCCKSから青空文庫形式に変換
+// http://support.bccks.jp/faq/text_import/
+
+function BccksAozora(str){
+//見出し
+str = str.replace(/^# (.+?)]/mg, "［＃大見出し］$1［＃大見出し終わり］");
+str = str.replace(/^## (.+?)]/mg, "［＃中見出し］$1［＃中見出し終わり］");
+str = str.replace(/^### (.+?)]/mg, "［＃小見出し］$1［＃小見出し終わり］");
+//改頁
+str = str.replace(/\n={3,}\n/mg, "［＃改ページ］");
+//強調
+//縦中横
+str = str.replace(/\[tcy\](.+?)\[\/tcy\]/mg, "$1［＃「$1」は縦中横］");
+//ルビ
+str=AozoraRuby(str);
+var str = str.replace(/｜(.+?)《(.+?)》/mg, "{$1}($2)");
+// リンク
+return str;
+}
+/*
 //青空文庫から小説家になろうへの変換
 /*
 ■ルビはいじらない
@@ -296,7 +310,9 @@ http://conv.denshochan.com/markdown
 **斜体**
 ［＃ここから太字］［＃ここで太字終わり］
 ［＃ここから斜体］［＃ここで斜体終わり］
-傍点をどうするかは後で考える
+■傍点
+http://blog.livedoor.jp/denden_proj/archives/48200785.html
+より縦書きの場合、*傍点*になる。
 ■ルビ
 {漢字|ルビ}
 ｜漢字《ルビ》　縦線がないルビをどうするか後で考える
@@ -331,6 +347,11 @@ var str = str.replace(/［＃改ページ］/mg, "\n=========\n");
 //リンク
 //<a href="(url)">こちら</a>
 //[こちら](http://example.com/)
+var str = str.replace(/<a href=\"(.+?)\">(.+?)<\/a>/mg, "[$2]($1)");
+//傍点
+//*傍点*
+//○○［＃「○○」に傍点］
+var str = str.replace(/(.+?)［＃「\1」に傍点］/mg, "*$1*");
 //ルビ
 //青空文庫のルビを漢字《ルビ》から｜漢字《ルビ》に統一
 str=AozoraRuby(str);
@@ -345,6 +366,22 @@ var str = str.replace(/［＃(.+?)（(.+?)）入る］/mg, "![$1]($2)");
 return str;
 }
 
+//// 青空文庫形式からBCCKSに変換
+function AozoraBccks(str){
+//見出し
+str = str.replace(/［＃大見出し］(.+?)［＃大見出し終わり］/mg, "# $1");
+str = str.replace(/［＃中見出し］(.+?)［＃中見出し終わり］/mg, "## $1");
+str = str.replace(/［＃中見出し］(.+?)［＃中見出し終わり］/mg, "### $1");
+//改頁
+str = str.replace(/［＃改ページ］/mg, "\n===\n}");
+//強調
+//縦中横
+str = str.replace(/(.+?)［＃「\1」は縦中横］/mg, "[tcy]$1[/tcy]");
+//ルビ
+str = str.replace(/\{(.+?)\}\((.+?)\)/mg, "｜$1《$2》");
+// リンク
+return str;
+}
 //青空文庫のルビを漢字《ルビ》から｜漢字《ルビ》に統一
 function AozoraRuby(str){
 //カタカナにひらがなでふりがな
