@@ -27,7 +27,7 @@ function henkan(){
 		case 2:str = AozoraPixiv(str);break;
 		case 3:break;
 		case 4:str = AozoraDenden(str);break;
-		case 4:str = AozoraBccks(str);break;
+		case 5:str = AozoraBccks(str);break;
 	}
 	document.form1.textarea2.value=str;
 }
