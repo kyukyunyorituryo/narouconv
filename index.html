@@ -5,8 +5,49 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <script src="novel.js"></script>
 <title>小説投稿サイト相互変換</title>
+    <!-- BootstrapのCSS読み込み -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Analytics -->
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-93342586-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <!-- BootstrapのJS読み込み -->
+    <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
+      <!-- ナビゲーション -->
+  <nav class="navbar navbar-default">
+	<div class="container-fluid ">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="https://kyukyunyorituryo.github.io/">Topページ</a>
+		</div>
+		
+		<div class="collapse navbar-collapse" id="navbarEexample">
+			<ul class="nav navbar-nav">
+
+				<li><a href="http://99nyorituryo.hatenablog.com/">作者ブログ</a></li>
+				<li ><a href="http://99nyorituryo.hatenablog.com/entry/2016/07/28/002841">関連する記事</a></li>
+				<li><a href="https://github.com/kyukyunyorituryo/narouconv">GitHub</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class=" col-sm-2"></div>
+      <div id="bg"class="container bg-info col-sm-7">
+
 <h1>小説投稿サイトの形式を相互に変換</h1>
 <hr>
 <form name="form1">
@@ -29,8 +70,9 @@
 	</select>
 へ<input type="button" value="変換" onclick="henkan()"></p>
 
-<p><textarea cols="100" rows="20" name="textarea1"></textarea></p>
-<p><textarea cols="100" rows="20" name="textarea2"></textarea></p>
+<p><textarea style="width:100%;height:90px" name="textarea1"></textarea></p>
+<p><textarea style="width:100%;height:90px" name="textarea2"></textarea></p>
 </form>
+</div></div>
 </body>
 </html>
